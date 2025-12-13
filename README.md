@@ -43,7 +43,7 @@ python pdf_image_converter.py
 ```
 ## 📦 打包成執行檔 (EXE)
 
-如果您希望將此工具打包成單一 `.exe` 檔案以便在沒有 Python 的電腦上執行，燕翼使用 **PyInstaller**。
+如果您希望將此工具打包成單一 `.exe` 檔案以便在沒有 Python 的電腦上執行，建議可使用 **PyInstaller**。
 
 1.  **安裝 PyInstaller**：
 
@@ -62,6 +62,6 @@ python pdf_image_converter.py
 
 ## 一般使用者下載 (EXE)
 
-如果您不想安裝 Python 環境，只想要簡單地直接使用軟體，目前我已經將打包成單一執行檔了。
+如果您不想安裝 Python 環境，只想要簡單地直接使用軟體，我已經將打包成單一執行檔了。
 請前往本專案的 **[Releases 頁面](https://github.com/kaoshou/pdf-image-converter/releases)** 下載後直接執行EXE檔即可，無需安裝任何軟體。
 
