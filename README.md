@@ -107,9 +107,4 @@ python pdf_image_toolkit.py
 * [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) - MIT 授權
 * [TkinterDnD2](https://github.com/pmgagne/tkinterdnd2) - MIT 授權
 
----
 
-## ✉️ 聯絡開發者
-* **開發者**：鄭郁翰 (Cheng, Yu-Han)
-* **Email**：kaoshou@gmail.com
-* **GitHub**：[kaoshou](https://github.com/kaoshou)
