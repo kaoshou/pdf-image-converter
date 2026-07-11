@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+.idea/
+.vscode/
+dist/
+build/
+*.spec
+test_temp_split/
+test_split.py
