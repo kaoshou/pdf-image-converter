@@ -57,12 +57,12 @@ jobs:
       - name: Build Executable (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          pyinstaller -F -w --name "PDF-Image-Converter" --icon "assets/app_icon.ico" --add-data "assets;assets" --add-data "components;components" --add-data "utils;utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
+          pyinstaller -F -w --name "PDF-Image-Converter" --icon "app_icon.ico" --add-data "app_icon.ico;." --add-data "app_icon.png;." --add-data "components;components" --add-data "utils;utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
 
       - name: Build Executable (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          pyinstaller -F -w --name "PDF-Image-Converter" --icon "assets/app_icon.ico" --add-data "assets:assets" --add-data "components:components" --add-data "utils:utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
+          pyinstaller -F -w --name "PDF-Image-Converter" --icon "app_icon.ico" --add-data "app_icon.ico:." --add-data "app_icon.png:." --add-data "components:components" --add-data "utils:utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
           cd dist
           zip -r ../PDF-Image-Converter-macOS.zip PDF-Image-Converter.app
           cd ..
@@ -70,7 +70,7 @@ jobs:
       - name: Build Executable (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          pyinstaller -F --name "PDF-Image-Converter" --add-data "assets:assets" --add-data "components:components" --add-data "utils:utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
+          pyinstaller -F --name "PDF-Image-Converter" --add-data "app_icon.ico:." --add-data "app_icon.png:." --add-data "components:components" --add-data "utils:utils" --collect-all tkinterdnd2 pdf_image_toolkit.py
 
       - name: Prepare Artifacts (Windows)
         if: matrix.os == 'windows-latest'
