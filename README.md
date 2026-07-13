@@ -8,13 +8,32 @@
 
 ---
 
+## 📥 下載與安裝
+
+### Windows 平台
+本工具已上架至 **Microsoft Store**，Windows 使用者可直接點擊下方徽章前往下載並安裝。
+
+<a href="https://apps.microsoft.com/store/detail/9PHJCKT834FL" target="_blank">
+  <img src="https://get.microsoft.com/images/zh-tw%20dark.svg" alt="下載由 Microsoft 提供的 PDF圖片工具箱" height="50" />
+</a>
+
+*(您亦可在 Windows 的 Microsoft Store 應用程式中直接搜尋「PDF圖片工具箱」進行安裝)*
+
+### 其他平台與手動部署
+本專案提供各平台（Windows, macOS, Linux）已建置完成的二進制版本，您也可以選擇使用原始碼自行編譯或執行：
+
+* **下載已編譯版本**：請直接至 [GitHub Releases](https://github.com/kaoshou/pdf-image-converter/releases) 頁面下載適用於您系統的執行檔。
+* **手動編譯或原始碼執行**：請參考下方的 [系統要求與環境安裝](#-系統要求與環境安裝) 進行手動部署。
+
+---
+
 ## 📸 介面展示
 
 ![介面展示](screenshot.png)
 
 ---
 
-## 💡 開發初衷
+## 💡 開發源由
 
 在日常處理文件時，往往不需要開啟臃腫的專業軟體，只希望能快速完成轉檔或壓縮。雖然網路上有許多免費的線上轉檔工具，但將個人財務、合約等敏感文件上傳至雲端有極高的隱私外洩風險。
 
@@ -168,3 +187,5 @@ python pdf_image_toolkit.py
 * [PyMuPDF (fitz)](https://github.com/pymupdf/PyMuPDF) - GNU AGPL v3.0 授權
 * [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) - MIT 授權
 * [TkinterDnD2](https://github.com/pmgagne/tkinterdnd2) - MIT 授權
+
+* 感謝生成式AI工具的幫助下完成開發
