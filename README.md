@@ -1,6 +1,6 @@
 # PDF 圖片工具箱 (pdf-image-toolkit)
 
-[![GitHub License](https://img.shields.io/github/license/kaoshou/pdf-image-converter)](https://github.com/kaoshou/pdf-image-converter/blob/main/LICENSE)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://github.com/kaoshou/pdf-image-converter/blob/main/LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![Platform Support](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey.svg)](https://github.com/kaoshou/pdf-image-converter)
 
@@ -55,7 +55,7 @@
 
 ## 💻 系統要求與安裝說明
 
-### 1. 克隆專案
+### 1. 複製專案
 ```bash
 git clone https://github.com/kaoshou/pdf-image-converter.git
 cd pdf-image-converter
