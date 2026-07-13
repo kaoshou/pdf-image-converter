@@ -9,3 +9,8 @@ build/
 *.spec
 test_temp_split/
 test_split.py
+
+# Windows MSIX packaging
+scripts/
+*.msix
+msix_build_temp/
