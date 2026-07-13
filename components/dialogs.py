@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import messagebox
 import customtkinter as ctk
 from utils.helpers import SYSTEM_FONT, FONT_OFFSET
+from utils.icons import get_icon
 from PIL import Image, ImageTk, ImageOps
 import io
 import threading
@@ -36,7 +37,11 @@ class ModernPasswordDialog(ctk.CTkToplevel):
         container = ctk.CTkFrame(self, fg_color="transparent")
         container.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
-        title_lbl = ctk.CTkLabel(container, text="🔒 檔案受密碼保護", 
+        # 建立大鎖頭圖示，置於文字左側，移除原先的 Emoji
+        lock_icon = get_icon("lock", size=(24, 24))
+        title_lbl = ctk.CTkLabel(container, text="  檔案受密碼保護", 
+                                 image=lock_icon,
+                                 compound="left",
                                  font=(SYSTEM_FONT, 14 + FONT_OFFSET, "bold"),
                                  text_color=("#2563EB", "#3B82F6"))
         title_lbl.pack(anchor="w", pady=(0, 6))
@@ -109,12 +114,12 @@ class ModernAboutDialog(ctk.CTkToplevel):
         container = ctk.CTkFrame(self, fg_color="transparent")
         container.pack(fill=tk.BOTH, expand=True, padx=25, pady=25)
 
-        title_lbl = ctk.CTkLabel(container, text="PDF 圖片轉換小工具", 
+        title_lbl = ctk.CTkLabel(container, text="PDF 圖片工具箱", 
                                  font=(SYSTEM_FONT, 16 + FONT_OFFSET, "bold"),
                                  text_color=("#1E3A8A", "#60A5FA"))
         title_lbl.pack(anchor="w", pady=(0, 2))
         
-        ver_lbl = ctk.CTkLabel(container, text="版本: 2.0", 
+        ver_lbl = ctk.CTkLabel(container, text="版本: 2.0.1", 
                                font=(SYSTEM_FONT, 10 + FONT_OFFSET, "bold"),
                                text_color=("#6B7280", "#9CA3AF"))
         ver_lbl.pack(anchor="w", pady=(0, 15))
@@ -208,7 +213,11 @@ class ModernSuccessDialog(ctk.CTkToplevel):
         container = ctk.CTkFrame(self, fg_color="transparent")
         container.pack(fill=tk.BOTH, expand=True, padx=24, pady=24)
 
-        title_lbl = ctk.CTkLabel(container, text="✨ 任務成功完成", 
+        # 建立成功勾勾圖示，置於文字左側，移除原先的 Emoji
+        success_icon = get_icon("success", size=(24, 24))
+        title_lbl = ctk.CTkLabel(container, text="  任務成功完成", 
+                                 image=success_icon,
+                                 compound="left",
                                  font=(SYSTEM_FONT, 15 + FONT_OFFSET, "bold"),
                                  text_color=("#10B981", "#34D399"))
         title_lbl.pack(anchor="w", pady=(0, 8))
@@ -316,7 +325,8 @@ class ModernCompressPreviewDialog(ctk.CTkToplevel):
             pass
 
         # 頂部狀態/載入中提示
-        self.title_lbl = ctk.CTkLabel(self, text="⚡ 正在模擬壓縮處理中，請稍後...", 
+        # 頂部狀態/載入中提示 (已移除 Emoji)
+        self.title_lbl = ctk.CTkLabel(self, text="正在模擬壓縮處理中，請稍後...", 
                                       font=(SYSTEM_FONT, 14 + FONT_OFFSET, "bold"),
                                       text_color=("#2563EB", "#3B82F6"))
         self.title_lbl.pack(pady=(15, 10))
@@ -329,7 +339,8 @@ class ModernCompressPreviewDialog(ctk.CTkToplevel):
         self.left_frame = ctk.CTkFrame(self.comparison_frame, border_width=1, border_color=("#E5E7EB", "#374151"))
         self.left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
         
-        self.left_img_lbl = ctk.CTkLabel(self.left_frame, text="🔍 載入中...", fg_color="black")
+        # 原始圖片載入中 (已移除 Emoji)
+        self.left_img_lbl = ctk.CTkLabel(self.left_frame, text="載入中...", fg_color="black")
         self.left_img_lbl.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         self.left_info_lbl = ctk.CTkLabel(self.left_frame, text="原圖載入中...", font=(SYSTEM_FONT, 10 + FONT_OFFSET))
@@ -339,7 +350,8 @@ class ModernCompressPreviewDialog(ctk.CTkToplevel):
         self.right_frame = ctk.CTkFrame(self.comparison_frame, border_width=1, border_color=("#E5E7EB", "#374151"))
         self.right_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(10, 0))
         
-        self.right_img_lbl = ctk.CTkLabel(self.right_frame, text="⚡ 處理中...", fg_color="black")
+        # 壓縮預覽處理中 (已移除 Emoji)
+        self.right_img_lbl = ctk.CTkLabel(self.right_frame, text="處理中...", fg_color="black")
         self.right_img_lbl.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         self.right_info_lbl = ctk.CTkLabel(self.right_frame, text="預估壓縮效果處理中...", font=(SYSTEM_FONT, 10 + FONT_OFFSET, "bold"), text_color=("#059669", "#10B981"))

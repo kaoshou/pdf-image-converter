@@ -8,6 +8,7 @@ import fitz  # PyMuPDF
 from tkinterdnd2 import DND_FILES
 
 from utils.helpers import SYSTEM_FONT, FONT_OFFSET, parse_dropped_files, unique_filename, finalize_and_save_pdf
+from utils.icons import get_icon
 from components.dialogs import ModernPasswordDialog
 from components.pdf_features import PDFFeaturesFrame
 
@@ -121,10 +122,13 @@ class TabImageToPDF(ctk.CTkFrame):
         self.tree.bind("<B1-Motion>", self._on_drag_motion, add="+")
         self.tree.bind("<ButtonRelease-1>", self._on_drag_drop, add="+")
         
-        # 空白清單引導 Label
+        # 空白清單引導 Label (使用大匯入圖示，置於文字上方，移除 Emoji)
+        import_icon = get_icon("import", size=(32, 32))
         self.lbl_empty_tip = ctk.CTkLabel(
             self.tree, 
-            text="📥 拖曳 PDF 或圖片檔案至此處，或點擊選擇檔案新增",
+            text="\n拖曳 PDF 或圖片檔案至此處，或點擊選擇檔案新增",
+            image=import_icon,
+            compound="top",
             font=(SYSTEM_FONT, 11 + FONT_OFFSET),
             text_color=("#9CA3AF", "#6B7280"),
             fg_color="transparent"
@@ -152,8 +156,11 @@ class TabImageToPDF(ctk.CTkFrame):
         
         btn_opt = {"height": 30, "font": (SYSTEM_FONT, 9 + FONT_OFFSET)}
         
-        # 第一行：清單操作與排序
-        self.btn_expand = ctk.CTkButton(ctrl_bar1, text="📂 展開 PDF", 
+        # 展開 PDF 按鈕 (使用線條展開資料夾圖示，移除 Emoji)
+        expand_icon = get_icon("expand", size=(16, 16))
+        self.btn_expand = ctk.CTkButton(ctrl_bar1, text="  展開 PDF", 
+                                            image=expand_icon,
+                                            compound="left",
                                             fg_color=("#EFF6FF", "#1E293B"),
                                             text_color=("#2563EB", "#3B82F6"),
                                             hover_color=("#DBEAFE", "#334155"),
@@ -196,7 +203,11 @@ class TabImageToPDF(ctk.CTkFrame):
                                             command=self._remove_selected, **btn_opt)
         self.btn_remove.pack(side=tk.LEFT, padx=(0, 6), expand=True, fill=tk.X)
         
-        self.btn_clear = ctk.CTkButton(ctrl_bar2, text="🗑 全部清空", 
+        # 全部清空按鈕 (使用垃圾桶圖示，移除 Emoji)
+        trash_icon = get_icon("trash", size=(16, 16))
+        self.btn_clear = ctk.CTkButton(ctrl_bar2, text="  全部清空", 
+                                           image=trash_icon,
+                                           compound="left",
                                            fg_color=("#FEF2F2", "#450A0A"),
                                            text_color=("#DC2626", "#F87171"),
                                            hover_color=("#FEE2E2", "#7F1D1D"),
@@ -215,8 +226,11 @@ class TabImageToPDF(ctk.CTkFrame):
         right_pane = ctk.CTkFrame(right_pane_outer, fg_color="transparent")
         right_pane.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
         
-        # 標題
-        t1_setting_lbl = ctk.CTkLabel(right_pane, text="⚙️ 執行與參數設定", 
+        # 標題 (使用齒輪圖示，移除 Emoji)
+        settings_icon = get_icon("settings", size=(16, 16))
+        t1_setting_lbl = ctk.CTkLabel(right_pane, text="  執行與參數設定", 
+                                      image=settings_icon,
+                                      compound="left",
                                       font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"))
         t1_setting_lbl.pack(anchor="w", pady=(0, 8))
         
@@ -239,7 +253,11 @@ class TabImageToPDF(ctk.CTkFrame):
                                            text_color="#9CA3AF")
         self.lbl_status.pack(anchor="w", pady=(0, 8))
         
-        self.btn_run = ctk.CTkButton(exec_frame, text="🚀 開始產生 PDF", 
+        # 開始產生 PDF 按鈕 (使用播放圖示，移除 Emoji)
+        run_icon = get_icon("run", size=(16, 16))
+        self.btn_run = ctk.CTkButton(exec_frame, text="  開始產生 PDF", 
+                                         image=run_icon,
+                                         compound="left",
                                          fg_color=("#059669", "#10B981"),
                                          text_color="white",
                                          hover_color=("#047857", "#059669"),

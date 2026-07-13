@@ -12,6 +12,7 @@ from utils.helpers import (
     FONT_OFFSET,
     ensure_app_icon,
 )
+from utils.icons import get_icon
 
 # 引入對話框組件
 from components.dialogs import (
@@ -113,12 +114,22 @@ class PDFImageToolkit(CTkDnD):
         logo_frame = ctk.CTkFrame(self.sidebar, fg_color="transparent")
         logo_frame.pack(fill=tk.X, padx=15, pady=(20, 30))
         
-        logo_lbl = ctk.CTkLabel(logo_frame, text="📐 Toolkit 控制台", 
-                                 font=(SYSTEM_FONT, 15 + FONT_OFFSET, "bold"),
-                                 text_color=("#2563EB", "#3B82F6"))
-        logo_lbl.pack(anchor="w")
+        # 建立內部容器，以讓 Logo 圖示與主標題能水平排列
+        logo_title_frame = ctk.CTkFrame(logo_frame, fg_color="transparent")
+        logo_title_frame.pack(anchor="w")
         
-        version_lbl = ctk.CTkLabel(logo_frame, text="版本 v2.0.0", 
+        # 建立獨立的 Logo 圖示與標題文字元件，徹底消除字串前怪異的空格，並更名為「PDF 圖片工具箱」
+        logo_icon = get_icon("logo", size=(24, 24))
+        logo_img_lbl = ctk.CTkLabel(logo_title_frame, text="", image=logo_icon)
+        logo_img_lbl.pack(side=tk.LEFT)
+        
+        logo_txt_lbl = ctk.CTkLabel(logo_title_frame, text="PDF 圖片工具箱", 
+                                     font=(SYSTEM_FONT, 15 + FONT_OFFSET, "bold"),
+                                     text_color=("#2563EB", "#3B82F6"))
+        logo_txt_lbl.pack(side=tk.LEFT, padx=(8, 0))
+        
+        # 版本資訊，排在標題下方
+        version_lbl = ctk.CTkLabel(logo_frame, text="版本 v2.0.1", 
                                    font=(SYSTEM_FONT, 8 + FONT_OFFSET),
                                    text_color=("#9CA3AF", "#6B7280"))
         version_lbl.pack(anchor="w", pady=(2, 0))
@@ -132,21 +143,24 @@ class PDFImageToolkit(CTkDnD):
         
         # 導覽項目定義
         nav_items = [
-            ("📂 圖片/PDF ➔ PDF", TabImageToPDF),
-            ("🖼  PDF ➔ 圖片", TabPDFToImage),
-            ("✂ PDF 拆分與擷取", TabPDFSplit),
-            ("⚡  PDF 壓縮", TabPDFCompress),
-            ("🔒  PDF 加密防護", TabPDFProtect),
-            ("⚙️  圖片壓縮與縮放", TabImageCompress),
+            ("圖片/PDF ➔ PDF", TabImageToPDF, "image_to_pdf"),
+            ("PDF ➔ 圖片", TabPDFToImage, "pdf_to_image"),
+            ("PDF 拆分與擷取", TabPDFSplit, "pdf_split"),
+            ("PDF 壓縮", TabPDFCompress, "pdf_compress"),
+            ("PDF 加密防護", TabPDFProtect, "pdf_protect"),
+            ("圖片壓縮與縮放", TabImageCompress, "image_compress"),
         ]
         
-        for idx, (label, cls) in enumerate(nav_items):
+        for idx, (label, cls, icon_key) in enumerate(nav_items):
             page = cls(self.main_area, self)
             self.pages.append(page)
             
+            icon_img = get_icon(icon_key, size=(20, 20))
             btn = ctk.CTkButton(
                 self.sidebar, 
-                text=label,
+                text=f"  {label}",
+                image=icon_img,
+                compound="left",
                 height=40,
                 anchor="w",
                 fg_color="transparent",
@@ -173,8 +187,11 @@ class PDFImageToolkit(CTkDnD):
         self.theme_switch.pack(anchor="w", pady=(0, 15))
         
         # 關於按鈕
+        about_icon = get_icon("about", size=(16, 16))
         about_btn = ctk.CTkButton(
-            bottom_frame, text="ℹ️ 關於本程式", 
+            bottom_frame, text="  關於本程式", 
+            image=about_icon,
+            compound="left",
             height=32,
             fg_color=("#E5E7EB", "#1E293B"),
             text_color=("#374151", "#E5E7EB"),

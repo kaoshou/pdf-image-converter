@@ -8,6 +8,7 @@ from PIL import Image, ImageOps
 from tkinterdnd2 import DND_FILES
 
 from utils.helpers import SYSTEM_FONT, FONT_OFFSET, parse_dropped_files, unique_filename
+from utils.icons import get_icon
 
 class TabImageCompress(ctk.CTkFrame):
     """圖片批次壓縮、縮放、旋轉與 EXIF 修改的功能分頁"""
@@ -70,10 +71,13 @@ class TabImageCompress(ctk.CTkFrame):
         self.tree.dnd_bind("<<Drop>>", self._handle_drop)
         self.tree.bind("<Delete>", lambda e: self._remove_selected())
         
-        # 空白清單引導 Label
+        # 空白清單引導 Label (使用大匯入圖示，置於文字上方，移除 Emoji)
+        import_icon = get_icon("import", size=(32, 32))
         self.lbl_empty_tip = ctk.CTkLabel(
             self.tree, 
-            text="📥 拖曳圖片檔案至此處，或點擊選擇圖片新增",
+            text="\n拖曳圖片檔案至此處，或點擊選擇圖片新增",
+            image=import_icon,
+            compound="top",
             font=(SYSTEM_FONT, 11 + FONT_OFFSET),
             text_color=("#9CA3AF", "#6B7280"),
             fg_color="transparent"
@@ -98,24 +102,36 @@ class TabImageCompress(ctk.CTkFrame):
         btn_frame = ctk.CTkFrame(left_pane, fg_color="transparent")
         btn_frame.pack(fill=tk.X, pady=(10, 0))
         
+        # 新增圖片按鈕 (使用 plus 圖示)
+        plus_icon = get_icon("plus", size=(14, 14))
         self.btn_add = ctk.CTkButton(
-            btn_frame, text="➕ 新增圖片", 
+            btn_frame, text="  新增圖片", 
+            image=plus_icon,
+            compound="left",
             command=self._add_files, 
             width=100, height=32, 
             font=(SYSTEM_FONT, 10 + FONT_OFFSET)
         )
         self.btn_add.pack(side=tk.LEFT, padx=(0, 10))
         
+        # 移除所選按鈕 (使用 minus 圖示)
+        minus_icon = get_icon("minus", size=(14, 14))
         self.btn_remove = ctk.CTkButton(
-            btn_frame, text="➖ 移除所選", 
+            btn_frame, text="  移除所選", 
+            image=minus_icon,
+            compound="left",
             command=self._remove_selected, 
             width=100, height=32, 
             font=(SYSTEM_FONT, 10 + FONT_OFFSET)
         )
         self.btn_remove.pack(side=tk.LEFT, padx=10)
         
+        # 清空清單按鈕 (使用 trash 圖示)
+        trash_icon = get_icon("trash", size=(14, 14))
         self.btn_clear = ctk.CTkButton(
-            btn_frame, text="🧹 清空清單", 
+            btn_frame, text="  清空清單", 
+            image=trash_icon,
+            compound="left",
             command=self._clear_all, 
             width=100, height=32, 
             font=(SYSTEM_FONT, 10 + FONT_OFFSET)
@@ -134,8 +150,12 @@ class TabImageCompress(ctk.CTkFrame):
         right_pane = ctk.CTkFrame(right_pane_outer, fg_color="transparent")
         right_pane.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
         
-        # 標題
-        t6_setting_lbl = ctk.CTkLabel(right_pane, text="⚙️ 執行與壓縮設定", font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"))
+        # 標題 (使用齒輪圖示，移除 Emoji)
+        settings_icon = get_icon("settings", size=(16, 16))
+        t6_setting_lbl = ctk.CTkLabel(right_pane, text="  執行與壓縮設定", 
+                                       image=settings_icon,
+                                       compound="left",
+                                       font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"))
         t6_setting_lbl.pack(anchor="w", pady=(0, 10))
         
         # 執行區域
@@ -158,8 +178,12 @@ class TabImageCompress(ctk.CTkFrame):
         self.btn_run_frame.pack(fill=tk.X)
         self.btn_run_frame.pack_propagate(False)
         
+        # 開始壓縮按鈕 (使用播放圖示，移除 Emoji)
+        run_icon = get_icon("run", size=(16, 16))
         self.btn_run = ctk.CTkButton(
-            self.btn_run_frame, text="🚀 開始壓縮", 
+            self.btn_run_frame, text="  開始壓縮", 
+            image=run_icon,
+            compound="left",
             fg_color=("#2563EB", "#3B82F6"),
             text_color="white",
             hover_color=("#1D4ED8", "#2563EB"),
@@ -169,8 +193,12 @@ class TabImageCompress(ctk.CTkFrame):
         )
         self.btn_run.pack(fill=tk.BOTH, expand=True)
         
+        # 終止作業按鈕 (使用終止圖示，移除 Emoji)
+        cancel_icon = get_icon("cancel", size=(16, 16))
         self.btn_cancel = ctk.CTkButton(
-            self.btn_run_frame, text="⛔ 終止作業", 
+            self.btn_run_frame, text="  終止作業", 
+            image=cancel_icon,
+            compound="left",
             fg_color=("#DC2626", "#EF4444"),
             text_color="white",
             hover_color=("#B91C1C", "#DC2626"),

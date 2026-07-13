@@ -7,6 +7,7 @@ import fitz
 from tkinterdnd2 import DND_FILES
 
 from utils.helpers import SYSTEM_FONT, FONT_OFFSET, parse_dropped_files, unique_filename, finalize_and_save_pdf
+from utils.icons import get_icon
 from components.pdf_features import PDFFeaturesFrame
 
 class TabPDFCompress(ctk.CTkFrame):
@@ -79,10 +80,13 @@ class TabPDFCompress(ctk.CTkFrame):
         self.tree.dnd_bind('<<Drop>>', self._handle_drop)
         self.tree.bind("<Delete>", lambda e: self._remove_selected())
         
-        # 空白清單引導 Label
+        # 空白清單引導 Label (使用大匯入圖示，置於文字上方，移除 Emoji)
+        import_icon = get_icon("import", size=(32, 32))
         self.lbl_empty_tip = ctk.CTkLabel(
             self.tree, 
-            text="📥 拖曳 PDF 檔案至此處，或點擊選擇檔案新增",
+            text="\n拖曳 PDF 檔案至此處，或點擊選擇檔案新增",
+            image=import_icon,
+            compound="top",
             font=(SYSTEM_FONT, 11 + FONT_OFFSET),
             text_color=("#9CA3AF", "#6B7280"),
             fg_color="transparent"
@@ -132,9 +136,12 @@ class TabPDFCompress(ctk.CTkFrame):
         right_pane = ctk.CTkFrame(right_pane_outer, fg_color="transparent")
         right_pane.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
         
-        # 標題
-        t4_setting_lbl = ctk.CTkLabel(right_pane, text="⚙️ 執行與壓縮設定", 
-                                      font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"))
+        # 標題 (使用齒輪圖示，移除 Emoji)
+        settings_icon = get_icon("settings", size=(16, 16))
+        t4_setting_lbl = ctk.CTkLabel(right_pane, text="  執行與壓縮設定", 
+                                       image=settings_icon,
+                                       compound="left",
+                                       font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"))
         t4_setting_lbl.pack(anchor="w", pady=(0, 10))
         
         # 執行區域
@@ -155,7 +162,11 @@ class TabPDFCompress(ctk.CTkFrame):
         self.btn_run_frame.pack(fill=tk.X)
         self.btn_run_frame.pack_propagate(False)
         
-        self.btn_run = ctk.CTkButton(self.btn_run_frame, text="🚀 開始壓縮", 
+        # 開始壓縮按鈕 (使用播放圖示，移除 Emoji)
+        run_icon = get_icon("run", size=(16, 16))
+        self.btn_run = ctk.CTkButton(self.btn_run_frame, text="  開始壓縮", 
+                                         image=run_icon,
+                                         compound="left",
                                          fg_color=("#2563EB", "#3B82F6"),
                                          text_color="white",
                                          hover_color=("#1D4ED8", "#2563EB"),
@@ -164,13 +175,17 @@ class TabPDFCompress(ctk.CTkFrame):
                                          height=44)
         self.btn_run.pack(fill=tk.BOTH, expand=True)
         
-        self.btn_cancel = ctk.CTkButton(self.btn_run_frame, text="⛔ 終止作業", 
-                                            fg_color=("#DC2626", "#EF4444"),
-                                            text_color="white",
-                                            hover_color=("#B91C1C", "#DC2626"),
-                                            font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"),
-                                            command=self._cancel_compress,
-                                            height=44)
+        # 終止作業按鈕 (使用終止圖示，移除 Emoji)
+        cancel_icon = get_icon("cancel", size=(16, 16))
+        self.btn_cancel = ctk.CTkButton(self.btn_run_frame, text="  終止作業", 
+                                             image=cancel_icon,
+                                             compound="left",
+                                             fg_color=("#DC2626", "#EF4444"),
+                                             text_color="white",
+                                             hover_color=("#B91C1C", "#DC2626"),
+                                             font=(SYSTEM_FONT, 12 + FONT_OFFSET, "bold"),
+                                             command=self._cancel_compress,
+                                             height=44)
                                             
         ctk.CTkFrame(right_pane, height=1, fg_color=("#E5E7EB", "#374151")).pack(fill=tk.X, pady=8)
         
